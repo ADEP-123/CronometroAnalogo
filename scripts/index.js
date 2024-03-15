@@ -69,5 +69,26 @@ for (let i = 0; i < 60; i++) {
     context.stroke();
 };
 
-
-
+//manesillas
+let angS = 0;
+let manecillaLength = radio * 0.8;
+//funcion para mover la manecilla
+let aumAng = () => {
+    angS += Math.PI / 30;
+    // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
+    movMan(angS)
+}
+let movMan = (angS) => {
+    contextManecillas.clearRect(0, 0, canvasManecillas.width, canvasManecillas.height); // Limpiar el lienzo antes de redibujar
+    // Dibujar la manecilla
+    contextManecillas.beginPath();
+    contextManecillas.strokeStyle = white;
+    contextManecillas.moveTo(radio, radio);
+    // Calcular las coordenadas finales de la línea de la manecilla
+    let xFin = radio + manecillaLength * Math.sin(angS);
+    let yFin = radio - manecillaLength * Math.cos(angS);
+    contextManecillas.lineTo(xFin, yFin);
+    contextManecillas.lineWidth = 3;
+    contextManecillas.stroke();
+}
+movMan(angS)
