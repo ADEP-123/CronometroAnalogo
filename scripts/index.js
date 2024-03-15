@@ -76,7 +76,7 @@ let manecillaLength = radio * 0.8;
 //funcion para mover la manecilla
 let aumAng = () => {
     // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
-    angS += Math.PI / 30;
+    angS += Math.PI / 60;
     movMan(angS)
 }
 let movMan = (angS) => {
@@ -114,7 +114,7 @@ butStartPause.addEventListener("click", (e) => {
     let status = butStartPause.classList[1]
     switchStartButton()
     if (status == "unpulsedStartPause") {
-        cronInterval = setInterval(aumAng, 1000);
+        cronInterval = setInterval(aumAng, 500);
     } else {
         clearInterval(cronInterval)
         cronInterval = null
