@@ -8,6 +8,7 @@ const darkRed = "#bb0000"
 const white = "#ffffff"
 const butStartPause = document.querySelector(".startPauseButton");
 const butReset = document.querySelector(".resetButton");
+let cronInterval = null;
 
 // Dibujar primer circulo externo
 context.beginPath();
@@ -74,8 +75,8 @@ let angS = 0;
 let manecillaLength = radio * 0.8;
 //funcion para mover la manecilla
 let aumAng = () => {
-    angS += Math.PI / 30;
     // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
+    angS += Math.PI / 30;
     movMan(angS)
 }
 let movMan = (angS) => {
@@ -93,7 +94,7 @@ let movMan = (angS) => {
 }
 movMan(angS)
 
-let cronInterval = null;
+
 butStartPause.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -106,5 +107,27 @@ butStartPause.addEventListener("click", (e) => {
         clearInterval(cronInterval)
         cronInterval = null
     }
-
 });
+
+butReset.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let status = butStartPause.classList[1]
+    butReset.classList.toggle("unpulsedReset");
+    butReset.classList.toggle("pulsedReset");
+    if (status == "unpulsedStartPause") {
+        butReset.classList.toggle("unpulsedReset");
+        butReset.classList.toggle("pulsedReset");
+    } else {
+        butReset.classList.toggle("unpulsedReset");
+        butReset.classList.toggle("pulsedReset");
+        butStartPause.classList.toggle("unpulsedStartPause");
+        butStartPause.classList.toggle("pulseStartPause");
+    }
+    if (cronInterval != null) {
+        clearInterval(cronInterval)
+        cronInterval = null
+    }
+    angS = 0;
+    movMan(0);
+})
