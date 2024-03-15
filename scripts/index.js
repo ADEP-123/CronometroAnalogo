@@ -92,3 +92,19 @@ let movMan = (angS) => {
     contextManecillas.stroke();
 }
 movMan(angS)
+
+let cronInterval = null;
+butStartPause.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let status = butStartPause.classList[1]
+    butStartPause.classList.toggle("unpulsedStartPause");
+    butStartPause.classList.toggle("pulseStartPause");
+    if (status == "unpulsedStartPause") {
+        cronInterval = setInterval(aumAng, 1000);
+    } else {
+        clearInterval(cronInterval)
+        cronInterval = null
+    }
+
+});
