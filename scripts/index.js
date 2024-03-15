@@ -94,13 +94,25 @@ let movMan = (angS) => {
 }
 movMan(angS)
 
+const switchStartButton = () => {
+    butStartPause.classList.toggle("unpulsedStartPause");
+    butStartPause.classList.toggle("pulseStartPause");
+}
+
+const switchResetButton = () => {
+    butReset.classList.toggle("unpulsedReset");
+    butReset.classList.toggle("pulsedReset");
+    setTimeout(() => {
+        butReset.classList.toggle("unpulsedReset");
+        butReset.classList.toggle("pulsedReset");
+    }, 400)
+}
 
 butStartPause.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     let status = butStartPause.classList[1]
-    butStartPause.classList.toggle("unpulsedStartPause");
-    butStartPause.classList.toggle("pulseStartPause");
+    switchStartButton()
     if (status == "unpulsedStartPause") {
         cronInterval = setInterval(aumAng, 1000);
     } else {
@@ -109,20 +121,17 @@ butStartPause.addEventListener("click", (e) => {
     }
 });
 
+
+
 butReset.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     let status = butStartPause.classList[1]
-    butReset.classList.toggle("unpulsedReset");
-    butReset.classList.toggle("pulsedReset");
     if (status == "unpulsedStartPause") {
-        butReset.classList.toggle("unpulsedReset");
-        butReset.classList.toggle("pulsedReset");
+        switchResetButton()
     } else {
-        butReset.classList.toggle("unpulsedReset");
-        butReset.classList.toggle("pulsedReset");
-        butStartPause.classList.toggle("unpulsedStartPause");
-        butStartPause.classList.toggle("pulseStartPause");
+        switchResetButton()
+        switchStartButton();
     }
     if (cronInterval != null) {
         clearInterval(cronInterval)

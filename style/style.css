@@ -42,16 +42,17 @@ body{
     width: 20px;
     background-color: var(--blue2);
     border: 0px;
+    transition: height 0.2s ease;
 }
 .unpulsedReset{
-    top: -229px;
-    left: -142px;
-    height: 30px;
-}
-.pulsedReset{
     top: -225px;
     left: -139px;
     height: 20px;
+}
+.pulsedReset{
+    top: -220px;
+    left: -137px;
+    height: 10px;
 }
 /* Start */
 .startPauseButton{
@@ -61,6 +62,7 @@ body{
     top: -263px;
     left: 10px;
     width: 20px;
+    transition: height 0.2s ease;
 }
 .unpulsedStartPause{
     height: 30px;
