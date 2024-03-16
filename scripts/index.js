@@ -81,7 +81,7 @@ for (let i = 0; i < 60; i++) {
 let aumAng = () => {
     contador++;
     // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
-    angS += Math.PI / 300;
+    angS += Math.PI / 3000;
     movMan(angS)
     formatCount(contador)
 }
@@ -118,7 +118,7 @@ const switchResetButton = () => {
 const formatCount = (data) => {
     let min = 0
     let sec = 0
-    let milSec = data * 100;
+    let milSec = data*10;
     if (milSec >= 1000) {
         sec = Math.trunc(milSec / 1000)
         milSec = milSec - (sec * 1000)
@@ -129,7 +129,7 @@ const formatCount = (data) => {
     }
     let formatMin = min < 10 ? `0${min}` : `${min}`;
     let formatSec = sec < 10 ? `0${sec}` : `${sec}`;
-    let formatMilSec = milSec === 0 ? '000' : `${milSec}`
+    let formatMilSec = milSec === 0 ? '00' : `${milSec}`
     countP.innerHTML = `${formatMin}:${formatSec}:${formatMilSec}`;
 }
 
@@ -139,7 +139,7 @@ butStartPause.addEventListener("click", (e) => {
     let status = butStartPause.classList[1]
     switchStartButton()
     if (status == "unpulsedStartPause") {
-        cronInterval = setInterval(aumAng, 100);
+        cronInterval = setInterval(aumAng, 10);
     } else {
         clearInterval(cronInterval)
         cronInterval = null
