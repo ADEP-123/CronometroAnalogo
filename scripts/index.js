@@ -9,6 +9,12 @@ const white = "#ffffff"
 const butStartPause = document.querySelector(".startPauseButton");
 const butReset = document.querySelector(".resetButton");
 let cronInterval = null;
+//manesillas
+let angS = 0;
+let manecillaLength = radio * 0.8;
+let contador = 0;
+//contador
+const countP = document.querySelector("#cuenta")
 
 // Dibujar primer circulo externo
 context.beginPath();
@@ -70,15 +76,16 @@ for (let i = 0; i < 60; i++) {
     context.stroke();
 };
 
-//manesillas
-let angS = 0;
-let manecillaLength = radio * 0.8;
+
 //funcion para mover la manecilla
 let aumAng = () => {
+    contador++;
     // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
-    angS += Math.PI / 60;
+    angS += Math.PI / 300;
     movMan(angS)
+    formatCount(contador)
 }
+
 let movMan = (angS) => {
     contextManecillas.clearRect(0, 0, canvasManecillas.width, canvasManecillas.height); // Limpiar el lienzo antes de redibujar
     // Dibujar la manecilla
@@ -108,13 +115,31 @@ const switchResetButton = () => {
     }, 400)
 }
 
+const formatCount = (data) => {
+    let min = 0
+    let sec = 0
+    let milSec = data * 100;
+    if (milSec >= 1000) {
+        sec = Math.trunc(milSec / 1000)
+        milSec = milSec - (sec * 1000)
+        if (sec > 60) {
+            min = Math.trunc(sec)
+            sec = sec - (min * 60)
+        }
+    }
+    let formatMin = min < 10 ? `0${min}` : `${min}`;
+    let formatSec = sec < 10 ? `0${sec}` : `${sec}`;
+    let formatMilSec = milSec === 0 ? '000' : `${milSec}`
+    countP.innerHTML = `${formatMin}:${formatSec}:${formatMilSec}`;
+}
+
 butStartPause.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     let status = butStartPause.classList[1]
     switchStartButton()
     if (status == "unpulsedStartPause") {
-        cronInterval = setInterval(aumAng, 500);
+        cronInterval = setInterval(aumAng, 100);
     } else {
         clearInterval(cronInterval)
         cronInterval = null
@@ -137,6 +162,9 @@ butReset.addEventListener("click", (e) => {
         clearInterval(cronInterval)
         cronInterval = null
     }
+    countP.innerHTML = "00:00:000"
+    contador = 0;
     angS = 0;
     movMan(0);
 })
+
