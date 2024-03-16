@@ -24,6 +24,19 @@ body{
     background-color: var(--black);
     color: var(--white);
 }
+/* Fecha y hora */
+#fecHora{
+    display: flex;
+    flex-direction: column-reverse;
+    font-size: 70px;
+    margin-bottom: 60px;
+}
+
+#reloj{
+    text-align: center;
+    letter-spacing: 0.05em;
+    padding: 5px 0;
+}
 
 /* Estructura cronometro */
 .container{

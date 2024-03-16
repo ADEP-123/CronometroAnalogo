@@ -20,6 +20,9 @@ const variables = {
     //contador
     countP: document.querySelector("#cuenta"),
     countStarted: false,
+    //Fecha y hora
+    fecha: document.querySelector("#fecha"),
+    reloj: document.querySelector("#reloj"),
     //Funcion de inicializacion
     init: function () {
         this.contextManecillas = this.canvasManecillas.getContext("2d");

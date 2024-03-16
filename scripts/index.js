@@ -3,7 +3,12 @@ import dibujarBase from "./modules/dibujarBase.js";
 import aumAng from "./modules/aumAngulo.js";
 import switchStartButton from "./modules/switchStartButton.js";
 import switchResetButton from "./modules/switchResetButton.js";
+import setDate from "./modules/date.js";
 variables.init();
+
+//fecha y hora
+//Llamado de la funcion para setear la fecha
+setDate()
 
 //Dibujar base del cronometro
 dibujarBase();
