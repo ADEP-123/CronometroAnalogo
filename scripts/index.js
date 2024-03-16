@@ -4,11 +4,13 @@ import aumAng from "./modules/aumAngulo.js";
 import switchStartButton from "./modules/switchStartButton.js";
 import switchResetButton from "./modules/switchResetButton.js";
 import setDate from "./modules/date.js";
+import currentTime from "./modules/setTime.js";
 variables.init();
 
 //fecha y hora
 //Llamado de la funcion para setear la fecha
 setDate()
+setInterval(currentTime, 1000);
 
 //Dibujar base del cronometro
 dibujarBase();
