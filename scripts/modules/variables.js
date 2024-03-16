@@ -19,7 +19,7 @@ const variables = {
     contador: 0,
     //contador
     countP: document.querySelector("#cuenta"),
-
+    countStarted: false,
     //Funcion de inicializacion
     init: function () {
         this.contextManecillas = this.canvasManecillas.getContext("2d");

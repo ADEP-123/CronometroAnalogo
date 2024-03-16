@@ -1,4 +1,5 @@
 import variables from "./variables.js"
+
 const dibujarBase = () => {
     // Dibujar primer circulo externo
     variables.context.beginPath();
