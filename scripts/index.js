@@ -1,124 +1,109 @@
-const canvas = document.querySelector(".chrono");
-const canvasManecillas = document.querySelector(".manecillas")
-const contextManecillas = canvasManecillas.getContext("2d")
-const context = canvas.getContext("2d");
-const radio = canvas.width / 2;
-const black = "#1e2025"
-const darkRed = "#bb0000"
-const white = "#ffffff"
-const butStartPause = document.querySelector(".startPauseButton");
-const butReset = document.querySelector(".resetButton");
-let cronInterval = null;
-//manesillas
-let angS = 0;
-let manecillaLength = radio * 0.8;
-let contador = 0;
-//contador
-const countP = document.querySelector("#cuenta")
+import variables from "./modules/variables.js";
+variables.init();
 
 // Dibujar primer circulo externo
-context.beginPath();
-context.fillStyle = darkRed
-context.arc(radio, radio, radio, 0, 2 * Math.PI);
-context.fill();
+variables.context.beginPath();
+variables.context.fillStyle = variables.darkRed
+variables.context.arc(variables.radio, variables.radio, variables.radio, 0, 2 * Math.PI);
+variables.context.fill();
 
-context.beginPath();
-context.fillStyle = black
-context.arc(radio, radio, radio - 5, 0, 2 * Math.PI);
-context.fill();
+variables.context.beginPath();
+variables.context.fillStyle = variables.black
+variables.context.arc(variables.radio, variables.radio, variables.radio - 5, 0, 2 * Math.PI);
+variables.context.fill();
 
 //Dibujar segundo circulo externo
-context.beginPath();
-context.fillStyle = darkRed
-context.arc(radio, radio, radio - 8, 0, 2 * Math.PI);
-context.fill();
+variables.context.beginPath();
+variables.context.fillStyle = variables.darkRed
+variables.context.arc(variables.radio, variables.radio, variables.radio - 8, 0, 2 * Math.PI);
+variables.context.fill();
 
-context.beginPath();
-context.fillStyle = black
-context.arc(radio, radio, radio - 10, 0, 2 * Math.PI);
-context.fill();
+variables.context.beginPath();
+variables.context.fillStyle = variables.black
+variables.context.arc(variables.radio, variables.radio, variables.radio - 10, 0, 2 * Math.PI);
+variables.context.fill();
 
 //Dibujar eje interno
-context.beginPath();
-context.fillStyle = white
-context.arc(radio, radio, 10, 0, 2 * Math.PI);
-context.fill();
+variables.context.beginPath();
+variables.context.fillStyle = variables.white
+variables.context.arc(variables.radio, variables.radio, 10, 0, 2 * Math.PI);
+variables.context.fill();
 
 //Dibujar numeros e indicadores
-context.font = radio / 10 + "px arial";
-context.textAlign = "center";
-context.textBaseline = "middle";
+variables.context.font = variables.radio / 10 + "px arial";
+variables.context.textAlign = "center";
+variables.context.textBaseline = "middle";
 for (let i = 0; i < 60; i++) {
-    context.strokeStyle = white;
+    variables.context.strokeStyle = variables.white;
     //Calcular coordenadas de inicio de linea de segundos
-    let x2 = radio + (radio - 12) * Math.sin(i * 2 * Math.PI / 60);
-    let y2 = radio - (radio - 12) * Math.cos(i * 2 * Math.PI / 60);
+    let x2 = variables.radio + (variables.radio - 12) * Math.sin(i * 2 * Math.PI / 60);
+    let y2 = variables.radio - (variables.radio - 12) * Math.cos(i * 2 * Math.PI / 60);
     let x1 = 0;
     let y1 = 0;
     if (i % 5 == 0) {
         //Dibujar numeros cada 5 segundos
-        context.fillText(i, radio + (radio - 30) * 0.9 * Math.sin(i * 2 * Math.PI / 60), radio - ((radio - 30) * 0.9 * Math.cos(i * 2 * Math.PI / 60)));
+        variables.context.fillText(i, variables.radio + (variables.radio - 30) * 0.9 * Math.sin(i * 2 * Math.PI / 60), variables.radio - ((variables.radio - 30) * 0.9 * Math.cos(i * 2 * Math.PI / 60)));
 
         // Calcular coordenadas de final de linea de segundos multiplos de 5
-        context.lineWidth = 3;
-        x1 = radio + (radio - 27) * Math.sin(i * 2 * Math.PI / 60);
-        y1 = radio - (radio - 27) * Math.cos(i * 2 * Math.PI / 60);
+        variables.context.lineWidth = 3;
+        x1 = variables.radio + (variables.radio - 27) * Math.sin(i * 2 * Math.PI / 60);
+        y1 = variables.radio - (variables.radio - 27) * Math.cos(i * 2 * Math.PI / 60);
     } else {
         // Calcular coordenadas de final de linea de otros segundos
-        context.lineWidth = 2;
-        y1 = radio - (radio - 22) * Math.cos(i * 2 * Math.PI / 60);
-        x1 = radio + (radio - 22) * Math.sin(i * 2 * Math.PI / 60);
+        variables.context.lineWidth = 2;
+        y1 = variables.radio - (variables.radio - 22) * Math.cos(i * 2 * Math.PI / 60);
+        x1 = variables.radio + (variables.radio - 22) * Math.sin(i * 2 * Math.PI / 60);
     }
     // Dibujar las lineas de los segundos
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.stroke();
+    variables.context.beginPath();
+    variables.context.moveTo(x1, y1);
+    variables.context.lineTo(x2, y2);
+    variables.context.stroke();
 };
 
 
 //funcion para mover la manecilla
 let aumAng = () => {
-    contador++;
+    variables.contador++;
     // Aumentar el ángulo en un cierto incremento (en radianes) por segundo
-    angS += Math.PI / 3000;
-    movMan(angS)
-    formatCount(contador)
+    variables.angS += Math.PI / 3000;
+    movMan(variables.angS)
+    formatCount(variables.contador)
 }
 
 let movMan = (angS) => {
-    contextManecillas.clearRect(0, 0, canvasManecillas.width, canvasManecillas.height); // Limpiar el lienzo antes de redibujar
+    variables.contextManecillas.clearRect(0, 0, variables.canvasManecillas.width, variables.canvasManecillas.height); // Limpiar el lienzo antes de redibujar
     // Dibujar la manecilla
-    contextManecillas.beginPath();
-    contextManecillas.strokeStyle = white;
-    contextManecillas.moveTo(radio, radio);
+    variables.contextManecillas.beginPath();
+    variables.contextManecillas.strokeStyle = variables.white;
+    variables.contextManecillas.moveTo(variables.radio, variables.radio);
     // Calcular las coordenadas finales de la línea de la manecilla
-    let xFin = radio + manecillaLength * Math.sin(angS);
-    let yFin = radio - manecillaLength * Math.cos(angS);
-    contextManecillas.lineTo(xFin, yFin);
-    contextManecillas.lineWidth = 3;
-    contextManecillas.stroke();
+    let xFin = variables.radio + variables.manecillaLength * Math.sin(angS);
+    let yFin = variables.radio - variables.manecillaLength * Math.cos(angS);
+    variables.contextManecillas.lineTo(xFin, yFin);
+    variables.contextManecillas.lineWidth = 3;
+    variables.contextManecillas.stroke();
 }
-movMan(angS)
+movMan(variables.angS)
 
 const switchStartButton = () => {
-    butStartPause.classList.toggle("unpulsedStartPause");
-    butStartPause.classList.toggle("pulseStartPause");
+    variables.butStartPause.classList.toggle("unpulsedStartPause");
+    variables.butStartPause.classList.toggle("pulseStartPause");
 }
 
 const switchResetButton = () => {
-    butReset.classList.toggle("unpulsedReset");
-    butReset.classList.toggle("pulsedReset");
+    variables.butReset.classList.toggle("unpulsedReset");
+    variables.butReset.classList.toggle("pulsedReset");
     setTimeout(() => {
-        butReset.classList.toggle("unpulsedReset");
-        butReset.classList.toggle("pulsedReset");
+        variables.butReset.classList.toggle("unpulsedReset");
+        variables.butReset.classList.toggle("pulsedReset");
     }, 400)
 }
 
 const formatCount = (data) => {
     let min = 0
     let sec = 0
-    let milSec = data*10;
+    let milSec = data * 10;
     if (milSec >= 1000) {
         sec = Math.trunc(milSec / 1000)
         milSec = milSec - (sec * 1000)
@@ -130,41 +115,41 @@ const formatCount = (data) => {
     let formatMin = min < 10 ? `0${min}` : `${min}`;
     let formatSec = sec < 10 ? `0${sec}` : `${sec}`;
     let formatMilSec = milSec === 0 ? '00' : `${milSec}`
-    countP.innerHTML = `${formatMin}:${formatSec}:${formatMilSec}`;
+    variables.countP.innerHTML = `${formatMin}:${formatSec}:${formatMilSec}`;
 }
 
-butStartPause.addEventListener("click", (e) => {
+variables.butStartPause.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
-    let status = butStartPause.classList[1]
+    let status = variables.butStartPause.classList[1]
     switchStartButton()
     if (status == "unpulsedStartPause") {
-        cronInterval = setInterval(aumAng, 10);
+        variables.cronInterval = setInterval(aumAng, 10);
     } else {
-        clearInterval(cronInterval)
-        cronInterval = null
+        clearInterval(variables.cronInterval)
+        variables.cronInterval = null
     }
 });
 
 
 
-butReset.addEventListener("click", (e) => {
+variables.butReset.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
-    let status = butStartPause.classList[1]
+    let status = variables.butStartPause.classList[1]
     if (status == "unpulsedStartPause") {
         switchResetButton()
     } else {
         switchResetButton()
         switchStartButton();
     }
-    if (cronInterval != null) {
-        clearInterval(cronInterval)
-        cronInterval = null
+    if (variables.cronInterval != null) {
+        clearInterval(variables.cronInterval)
+        variables.cronInterval = null
     }
-    countP.innerHTML = "00:00:000"
-    contador = 0;
-    angS = 0;
+    variables.countP.innerHTML = "00:00:000"
+    variables.contador = 0;
+    variables.angS = 0;
     movMan(0);
 })
 
