@@ -16,8 +16,8 @@ const variables = {
     //manesillas
     angS: 0,
     manecillaLength: null,
-    contador: 0,
     //contador
+    contador: 0,
     countP: document.querySelector("#cuenta"),
     countStarted: false,
     //Fecha y hora
