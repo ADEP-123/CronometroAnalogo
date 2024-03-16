@@ -4,8 +4,8 @@ const variables = {
     canvasManecillas: document.querySelector(".manecillas"),
     contextManecillas: null,
     context: null,
-    // Colores
     radio: null,
+    // Colores
     black: "#1e2025",
     darkRed: "#bb0000",
     white: "#ffffff",
