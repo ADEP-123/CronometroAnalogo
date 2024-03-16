@@ -1,24 +1,12 @@
 import variables from "./modules/variables.js";
 import dibujarBase from "./modules/dibujarBase.js";
 import aumAng from "./modules/aumAngulo.js";
+import switchStartButton from "./modules/switchStartButton.js";
+import switchResetButton from "./modules/switchResetButton.js";
 variables.init();
 
 //Dibujar base del cronometro
 dibujarBase();
-
-const switchStartButton = () => {
-    variables.butStartPause.classList.toggle("unpulsedStartPause");
-    variables.butStartPause.classList.toggle("pulseStartPause");
-}
-
-const switchResetButton = () => {
-    variables.butReset.classList.toggle("unpulsedReset");
-    variables.butReset.classList.toggle("pulsedReset");
-    setTimeout(() => {
-        variables.butReset.classList.toggle("unpulsedReset");
-        variables.butReset.classList.toggle("pulsedReset");
-    }, 400)
-}
 
 //funcionamiento manecillas
 aumAng();
