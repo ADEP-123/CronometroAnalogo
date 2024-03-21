@@ -6,3 +6,4 @@
 <p>El cronometro consta de dos botones, uno rojo y uno azul, el boton rojo funciona para iniciar y pausar el cronometro y el azul para reiniciarlo</p>
 <h1>Autor:</h1>
 <p><b>Andrés David Elizalde Peralta</b></p>
+<a href="https://adep-123.github.io/CronometroAnalogo" target="_blank"><h2>Link:</h2></a>
